@@ -1,76 +1,86 @@
 import React from "react";
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaYoutube,
+  FaInstagram,
+  FaPhoneAlt,
+  FaEnvelope,
+} from "react-icons/fa";
+
+const paymentIcons = [
+  "https://i.ibb.co/fSrR5WW/visa.png",
+  "https://i.ibb.co/T1nmRf0/mastercard.png",
+  "https://i.ibb.co/FwrYfd2/bkash.png",
+  "https://i.ibb.co/pXrX2qx/nagad.png",
+  "https://i.ibb.co/J2Y2BQc/rocket.png",
+  "https://i.ibb.co/5TjPM7n/dbbl.png",
+];
 
 const Footer = () => {
   return (
-    <footer className="bg-base-200 text-base-content py-12 shadow-2xl px-6 md:px-20">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+    <footer className="bg-base-100 text-base-content py-12 px-6 md:px-20">
+      <div className="max-w-7xl mx-auto grid gap-10 md:grid-cols-4">
 
-        {/* Logo & Address */}
+        {/* Discover Links */}
         <div>
-          <div className="flex items-center gap-3 mb-4">
-            <img
-              src="https://i.ibb.co/RG51Tmxt/wendar-removebg-preview.png"
-              alt="logo"
-              className="w-32 md:w-40 lg:w-48 h-auto object-contain"
-            />
-          </div>
-          <p className="text-sm mb-2 leading-relaxed">
-            WanderNest Inc. <br />
-            123 Tech Park, Silicon Valley, CA
-          </p>
-          <p className="text-xs text-gray-500 dark:text-gray-400">
-            © 2025 WanderNest. All rights reserved.
-          </p>
-        </div>
-
-        {/* Services */}
-        <div>
-          <h3 className="footer-title">Services</h3>
-          <ul className="space-y-2 text-sm">
-            <li><a href="#" className="link link-hover">Branding</a></li>
-            <li><a href="#" className="link link-hover">Design</a></li>
-            <li><a href="#" className="link link-hover">Marketing</a></li>
-            <li><a href="#" className="link link-hover">Advertisement</a></li>
+          <h3 className="text-lg font-semibold mb-4">Discover</h3>
+          <ul className="space-y-2 text-sm text-base-content/80">
+            <li><a href="#" className="hover:underline">Home</a></li>
+            <li><a href="#" className="hover:underline">Terms</a></li>
+            <li><a href="#" className="hover:underline">Talent & Culture</a></li>
+            <li><a href="#" className="hover:underline">About Us</a></li>
           </ul>
         </div>
 
-        {/* Company */}
+        {/* Payment Methods */}
         <div>
-          <h3 className="footer-title">Company</h3>
-          <ul className="space-y-2 text-sm">
-            <li><a href="#" className="link link-hover">About Us</a></li>
-            <li><a href="#" className="link link-hover">Contact</a></li>
-            <li><a href="#" className="link link-hover">Jobs</a></li>
-            <li><a href="#" className="link link-hover">Press Kit</a></li>
-          </ul>
-        </div>
-
-        {/* Legal & Social */}
-        <div>
-          <h3 className="footer-title">Legal</h3>
-          <ul className="space-y-2 text-sm mb-4">
-            <li><a href="#" className="link link-hover">Terms of Use</a></li>
-            <li><a href="#" className="link link-hover">Privacy Policy</a></li>
-            <li><a href="#" className="link link-hover">Cookie Policy</a></li>
-          </ul>
-
-          <div className="flex gap-4 mt-2 text-xl">
-            <a href="#" className="hover:text-primary" aria-label="Facebook">
-              <FaFacebookF />
-            </a>
-            <a href="#" className="hover:text-primary" aria-label="Twitter">
-              <FaTwitter />
-            </a>
-            <a href="#" className="hover:text-primary" aria-label="Instagram">
-              <FaInstagram />
-            </a>
-            <a href="#" className="hover:text-primary" aria-label="LinkedIn">
-              <FaLinkedinIn />
-            </a>
+          <h3 className="text-lg font-semibold mb-4">Payment Methods</h3>
+          <div className="grid grid-cols-3 gap-3">
+            {paymentIcons.map((icon, i) => (
+              <img
+                key={i}
+                src={icon}
+                alt="payment"
+                className="w-12 h-8 object-contain bg-white p-1 rounded shadow"
+              />
+            ))}
           </div>
         </div>
 
+        {/* Help & Experience */}
+        <div>
+          <h3 className="text-lg font-semibold mb-4">Need Help?</h3>
+          <p className="text-sm text-base-content/80 mb-3">
+            We're here 24/7! Reach out via Messenger or call anytime.
+          </p>
+          <h4 className="text-md font-semibold mb-1">Experience Center</h4>
+          <p className="text-sm text-base-content/80">
+            Sheltech Ayaan,<br />
+            House 58, Road 6 & 11,<br />
+            Block C, Level 2, Banani, Dhaka
+          </p>
+        </div>
+
+        {/* Contact & Socials */}
+        <div>
+          <h3 className="text-lg font-semibold mb-4">Contact</h3>
+          <p className="flex items-center gap-2 text-sm text-base-content/80 mb-2">
+            <FaEnvelope /> info@wandernest.com
+          </p>
+          <p className="flex items-center gap-2 text-sm text-base-content/80 mb-4">
+            <FaPhoneAlt /> +88 09678 123456
+          </p>
+          <div className="flex gap-4 text-lg">
+            <a href="#" className="hover:text-primary"><FaFacebookF /></a>
+            <a href="#" className="hover:text-primary"><FaYoutube /></a>
+            <a href="#" className="hover:text-primary"><FaInstagram /></a>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom copyright */}
+      <div className="border-t border-base-content/20 mt-10 pt-6 text-center text-sm text-base-content/60">
+        © {new Date().getFullYear()} WanderNest. All rights reserved.
       </div>
     </footer>
   );

@@ -1,25 +1,62 @@
 import React from 'react';
+import { FaUserTie, FaCalendarCheck, FaHeadset } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+
+const features = [
+  {
+    title: 'Expert Guides',
+    description: 'Handpicked and professional tour guides who know every inch of your destination.',
+    icon: <FaUserTie className="text-3xl text-primary" />,
+  },
+  {
+    title: 'Flexible Booking',
+    description: 'Easy and secure booking system with flexible rescheduling options.',
+    icon: <FaCalendarCheck className="text-3xl text-primary" />,
+  },
+  {
+    title: '24/7 Support',
+    description: 'Our travel support team is available round the clock to assist you anytime.',
+    icon: <FaHeadset className="text-3xl text-primary" />,
+  },
+];
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-12 bg-base-200 text-base-content">
-      <div className="max-w-6xl mx-auto px-4 text-center">
-        <h2 className="text-3xl font-bold mb-4">Why Choose WanderNest?</h2>
-        <p className="mb-8 text-sm text-gray-500 dark:text-gray-400">We offer unforgettable travel experiences backed by trusted guides, top-notch support, and flexible packages.</p>
+    <section className="py-16 bg-base-200 text-base-content">
+      <div className="max-w-6xl mx-auto px-6">
+        <motion.h2
+          className="text-4xl font-bold text-center mb-4"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          Why Choose WanderNest?
+        </motion.h2>
+        <motion.p
+          className="mb-12 text-gray-700 dark:text-gray-400 max-w-xl mx-auto text-center text-sm"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          We offer unforgettable travel experiences backed by trusted guides, top-notch support, and flexible packages.
+        </motion.p>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="p-6 rounded-xl bg-base-100 shadow">
-            <h3 className="text-xl font-semibold mb-2">Expert Guides</h3>
-            <p className="text-sm">Handpicked and professional tour guides who know every inch of your destination.</p>
-          </div>
-          <div className="p-6 rounded-xl bg-base-100 shadow">
-            <h3 className="text-xl font-semibold mb-2">Flexible Booking</h3>
-            <p className="text-sm">Easy and secure booking system with flexible rescheduling options.</p>
-          </div>
-          <div className="p-6 rounded-xl bg-base-100 shadow">
-            <h3 className="text-xl font-semibold mb-2">24/7 Support</h3>
-            <p className="text-sm">Our travel support team is available round the clock to assist you anytime.</p>
-          </div>
+        <div className="flex flex-col md:flex-row items-center justify-around gap-10">
+          {features.map((item, index) => (
+            <motion.div
+              key={index}
+              className="flex flex-col items-center text-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.2 }}
+            >
+              <div className="mb-4 bg-base-100 p-4 rounded-full shadow-lg">
+                {item.icon}
+              </div>
+              <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+              <p className="text-sm text-gray-200 dark:text-gray-500 max-w-xs">{item.description}</p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
