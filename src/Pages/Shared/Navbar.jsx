@@ -15,40 +15,39 @@ const Navbar = () => {
   console.log(user)
 
   const handleLogout = () => {
-  Swal.fire({
-    title: 'Are you sure?',
-    text: "You want to logout!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, logout',
-  }).then((result) => {
-    if (result.isConfirmed) {
-      logOut()
-        .then(() => {
-          setIsOpen(false);
-          Swal.fire(
-            'Logged Out!',
-            'You have been logged out successfully.',
-            'success'
-          );
-        })
-        .catch((error) => {
-          console.error(error);
-          Swal.fire(
-            'Oops!',
-            'Something went wrong during logout.',
-            'error'
-          );
-        });
-    }
-  });
-};
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to logout!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, logout',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logOut()
+          .then(() => {
+            setIsOpen(false);
+            Swal.fire(
+              'Logged Out!',
+              'You have been logged out successfully.',
+              'success'
+            );
+          })
+          .catch((error) => {
+            console.error(error);
+            Swal.fire(
+              'Oops!',
+              'Something went wrong during logout.',
+              'error'
+            );
+          });
+      }
+    });
+  };
 
-  const navClass = `shadow sticky top-0 z-50 ${
-    theme === "dark" ? "bg-[#0f172a] text-white" : "bg-white text-gray-800"
-  }`;
+  const navClass = `shadow sticky top-0 z-50 ${theme === "dark" ? "bg-[#0f172a] text-white" : "bg-white text-gray-800"
+    }`;
 
   const dropdownBg =
     theme === "dark"
@@ -64,8 +63,11 @@ const Navbar = () => {
           to="/"
           className="flex items-center gap-2 text-2xl font-bold text-blue-600 dark:text-blue-400"
         >
-          <FaBusAlt />
-          WanderNest
+          <img
+            src="https://i.ibb.co/RG51Tmxt/wendar-removebg-preview.png"
+            alt="logo"
+            className="w-20 md:w-24 lg:w-44 h-auto object-contain"
+          />
         </Link>
 
         {/* Desktop Menu */}
@@ -73,8 +75,8 @@ const Navbar = () => {
           <li><NavItem to="/" label="Home" /></li>
           <li><NavItem to="/packages" label="All Packages" /></li>
           <li><NavItem to="/about" label="About Us" /></li>
-          {user && 
-          <li><NavItem to="/my-bookings" label="My Bookings" /></li>
+          {user &&
+            <li><NavItem to="/my-bookings" label="My Bookings" /></li>
           }
 
           {!user ? (
@@ -139,11 +141,10 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <ul
-          className={`md:hidden px-6 pb-4 space-y-2 font-medium ${
-            theme === "dark"
+          className={`md:hidden px-6 pb-4 space-y-2 font-medium ${theme === "dark"
               ? "bg-[#0f172a] text-white"
               : "bg-white text-gray-800"
-          }`}
+            }`}
         >
           <li>
             <NavItem to="/" label="Home" onClick={() => setIsOpen(false)} />
