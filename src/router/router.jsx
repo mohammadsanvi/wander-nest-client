@@ -9,7 +9,7 @@ import Login from "../Pages/Login/Login";
 import About from "../Pages/AbouUs/About";
 import PrivateRoute from "./PrivateRoute";
 import AddTourPackage from "../Pages/AddTourPackage/AddTourPackage";
-import AllPackages from "../Pages/Packge/AllPackages";
+import AllPackages from "../Pages/Packages/AllPackages";
 
 const router = createBrowserRouter([
   {
@@ -42,7 +42,8 @@ const router = createBrowserRouter([
       },
       {
         path:"packages",
-        Component:AllPackages
+        Component:AllPackages,
+        loader:() => fetch('http://localhost:3000/tour-packages')
       }
     ]
   },
