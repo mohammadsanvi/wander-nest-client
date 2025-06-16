@@ -57,7 +57,7 @@ const Navbar = () => {
           <img
             src="https://i.ibb.co/RG51Tmxt/wendar-removebg-preview.png"
             alt="logo"
-            className="w-20 md:w-24 lg:w-52 h-auto object-contain"
+            className="w-40 md:w-24 lg:w-52 h-auto object-contain"
           />
         </Link>
 

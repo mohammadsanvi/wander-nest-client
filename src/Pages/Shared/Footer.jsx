@@ -8,12 +8,12 @@ import {
 } from "react-icons/fa";
 
 const paymentIcons = [
-  "https://i.ibb.co/fSrR5WW/visa.png",
-  "https://i.ibb.co/T1nmRf0/mastercard.png",
-  "https://i.ibb.co/FwrYfd2/bkash.png",
-  "https://i.ibb.co/pXrX2qx/nagad.png",
-  "https://i.ibb.co/J2Y2BQc/rocket.png",
-  "https://i.ibb.co/5TjPM7n/dbbl.png",
+  "https://i.ibb.co/rfs5MNTd/294654-visa-icon.png",
+  "https://i.ibb.co/KzB4fyWR/1933703-charge-credit-card-debit-mastercard-payment-icon.png",
+  "https://i.ibb.co/KcRPqP12/bkash-seeklogo.png",
+  "https://i.ibb.co/TDJx7T5m/nagad-seeklogo.png",
+  "https://i.ibb.co/4n23SYMQ/dutch-bangla-rocket-seeklogo.png",
+  "https://i.ibb.co/20rvjdNf/dutch-bangla-bank-ltd-logo-png-seeklogo-310356.png",
 ];
 
 const Footer = () => {
