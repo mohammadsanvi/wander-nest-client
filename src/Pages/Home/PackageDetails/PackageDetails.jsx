@@ -8,7 +8,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 
 const PackageDetails = () => {
-  const data = useLoaderData();
+  const loadedData = useLoaderData();
+  const [data, setData] = useState(loadedData);
   const {
     tour_name,
     image,
@@ -56,6 +57,10 @@ const PackageDetails = () => {
           title: 'Booking Successful!',
           text: 'Your booking request has been submitted.',
         });
+
+        const updated = await axios.get(`http://localhost:3000/tour-packages/${_id}`);
+        setData(updated.data);
+        
         form.reset();
         setShowModal(false);
       } else {

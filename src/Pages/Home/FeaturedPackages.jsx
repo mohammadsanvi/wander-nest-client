@@ -7,6 +7,8 @@ import axios from "axios";
 const FeaturedPackages = () => {
   const [packages, setPackages] = useState([]);
   const navigate = useNavigate();
+  const [loading, setloading] = useState(true)
+
 
   useEffect(() => {
     axios
@@ -14,9 +16,18 @@ const FeaturedPackages = () => {
       .then((res) => {
         const firstSix = res.data.slice(0, 6);
         setPackages(firstSix);
+        setloading(false)
       })
       .catch((err) => console.error(err));
   }, []);
+
+   if (loading) {
+    return (
+      <div className="min-h-[50vh] flex justify-center items-center">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
+      </div>
+    );
+  }
 
   return (
     <section className="py-16 px-4 md:px-10 lg:px-20 bg-base-100 text-base-content">
@@ -60,7 +71,7 @@ const FeaturedPackages = () => {
               </div>
 
               <div className="card-actions mt-4">
-                <Link  className="btn btn-sm btn-primary w-full" to={`/packages/package-details/${pkg._id}`}>View Details</Link>
+                <Link className="btn btn-sm btn-primary w-full" to={`/packages/package-details/${pkg._id}`}>View Details</Link>
               </div>
             </div>
           </motion.div>

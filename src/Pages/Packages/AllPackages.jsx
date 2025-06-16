@@ -59,6 +59,14 @@ const AllPackages = ({ isLoggedIn }) => {
       .catch(() => setLoading(false));
   };
 
+    if (loading) {
+    return (
+      <div className="min-h-[50vh] flex justify-center items-center">
+        <span className="loading loading-spinner loading-lg text-primary"></span>
+      </div>
+    );
+  }
+
   return (
     <div className="px-4 md:px-10 lg:px-20 my-24">
       <h1 className="text-3xl font-bold mb-8 text-center flex justify-center items-center gap-4">

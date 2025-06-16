@@ -13,12 +13,11 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   // const [scrolled, setScrolled] = useState(false);
 
- 
+
 
   // Dynamic class
- const navClass = `fixed top-0 left-0 w-full z-50 transition-all duration-300 shadow-md ${
-  theme === 'dark' ? 'bg-base-100 text-white' : 'bg-white text-gray-900'
-}`;
+  const navClass = `fixed top-0 left-0 w-full z-50 transition-all duration-300 shadow-md ${theme === 'dark' ? 'bg-base-100 text-white' : 'bg-white text-gray-900'
+    }`;
 
   const dropdownBg =
     theme === "dark" ? "bg-[#1e293b] text-white" : "bg-white text-gray-900";
@@ -69,7 +68,7 @@ const Navbar = () => {
           <li><NavItem to="/about" label="About Us" /></li>
           {user && <li><NavItem to="/my-bookings" label="My Bookings" /></li>}
           {!user ? (
-            <li><NavItem to="/login" label="Login" /></li>
+            <li className="btn btn-primary"><NavItem to="/login" label="Login"/></li>
           ) : (
             <li className="relative">
               <div className="dropdown dropdown-end">

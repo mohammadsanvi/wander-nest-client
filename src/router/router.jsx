@@ -12,6 +12,7 @@ import AddTourPackage from "../Pages/AddTourPackage/AddTourPackage";
 import AllPackages from "../Pages/Packages/AllPackages";
 import PackageDetails from "../Pages/Home/PackageDetails/packageDetails";
 import { param } from "framer-motion/client";
+import ManageMyPackages from "../Pages/AbouUs/MyPackages/ManageMyPackages";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddTourPackage />
+          </PrivateRoute>
+        )
+      },
+      {
+        path: "manage-packages",
+        element: (
+          <PrivateRoute>
+           <ManageMyPackages></ManageMyPackages>
           </PrivateRoute>
         )
       },
