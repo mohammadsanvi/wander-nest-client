@@ -11,9 +11,9 @@ import PrivateRoute from "./PrivateRoute";
 import AddTourPackage from "../Pages/AddTourPackage/AddTourPackage";
 import AllPackages from "../Pages/Packages/AllPackages";
 import PackageDetails from "../Pages/Home/PackageDetails/packageDetails";
-import { param } from "framer-motion/client";
 import ManageMyPackages from "../Pages/AbouUs/MyPackages/ManageMyPackages";
 import MyBookings from "../Pages/MyBookings/MyBookings";
+import Error from "../Pages/ErrrorPage/Error";
 
 const router = createBrowserRouter([
   {
@@ -71,7 +71,10 @@ const router = createBrowserRouter([
         loader: ({ params }) => fetch(`http://localhost:3000/tour-packages/${params.id}`)
       }
     ]
-
+  },
+  {
+    path: "*",
+    Component:Error
   },
 ]);
 
