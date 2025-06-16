@@ -7,8 +7,8 @@ import { motion } from "framer-motion";
 import { FaEarthAmericas } from "react-icons/fa6";
 
 const AllPackages = ({ isLoggedIn }) => {
-  const data = useLoaderData();
-  const [packages, setPackages] = useState(data);
+  const initialData = useLoaderData();
+  const [packages, setPackages] = useState(initialData);
   const [searchTerm, setSearchTerm] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -16,7 +16,7 @@ const AllPackages = ({ isLoggedIn }) => {
 
   useEffect(() => {
     if (searchTerm.trim() === "") {
-      setPackages(data);
+      setPackages(initialData);
       setSuggestions([]);
       return;
     }
@@ -25,12 +25,13 @@ const AllPackages = ({ isLoggedIn }) => {
       .get(`http://localhost:3000/tour-packages?name=${searchTerm}`)
       .then((res) => {
         setSuggestions(res.data);
-      });
-  }, [searchTerm]);
+      })
+      .catch(() => setSuggestions([]));
+  }, [searchTerm, initialData]);
 
   const handleSearchClick = () => {
     if (searchTerm.trim() === "") {
-      setPackages(data);
+      setPackages(initialData);
       return;
     }
 
@@ -60,7 +61,9 @@ const AllPackages = ({ isLoggedIn }) => {
 
   return (
     <div className="px-4 md:px-10 lg:px-20 my-24">
-      <h1 className="text-3xl font-bold mb-8 text-center flex justify-center items-center gap-4"> <FaEarthAmericas size={40}/> <span>All Tour Packages</span></h1>
+      <h1 className="text-3xl font-bold mb-8 text-center flex justify-center items-center gap-4">
+        <FaEarthAmericas size={40} /> <span>All Tour Packages</span>
+      </h1>
 
       {/* Search Box */}
       <div className="relative w-full max-w-md mx-auto mb-10">
@@ -76,7 +79,7 @@ const AllPackages = ({ isLoggedIn }) => {
           />
           <button
             onClick={handleSearchClick}
-            className={`btn btn-primary ${loading && "btn-disabled"}`}
+            className={`btn btn-primary ${loading ? "btn-disabled" : ""}`}
             aria-label="Search"
           >
             {loading ? (
@@ -106,7 +109,7 @@ const AllPackages = ({ isLoggedIn }) => {
       {/* Loading Message */}
       {loading && (
         <div className="text-center text-lg text-primary mb-4">
-          Loading packages...
+          <span className="loading loading-spinner loading-lg"></span>
         </div>
       )}
 

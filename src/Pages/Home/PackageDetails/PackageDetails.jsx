@@ -28,49 +28,48 @@ const PackageDetails = () => {
 
   const { user } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
-  console.log(user)
 
-const handleBooking = async (e) => {
-  e.preventDefault();
-  const form = e.target;
-  const note = form.note.value;
+  const handleBooking = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const note = form.note.value;
 
-  const bookingData = {
-    tour_id: _id,
-    tour_name,
-    guide_name,
-    guide_email,
-    buyer_name: user?.displayName,
-    buyer_email: user?.email,
-    booking_date: new Date(),
-    departure_date,
-    notes: note,
-    status: "pending"
-  };
+    const bookingData = {
+      tour_id: _id,
+      tour_name,
+      guide_name,
+      guide_email,
+      buyer_name: user?.displayName,
+      buyer_email: user?.email,
+      booking_date: new Date(),
+      departure_date,
+      notes: note,
+      status: "pending"
+    };
 
-  try {
-    const res = await axios.post("http://localhost:3000/bookings", bookingData);
+    try {
+      const res = await axios.post("http://localhost:3000/bookings", bookingData);
 
-    if (res.data.insertedId) {
+      if (res.data.insertedId) {
+        await Swal.fire({
+          icon: 'success',
+          title: 'Booking Successful!',
+          text: 'Your booking request has been submitted.',
+        });
+        form.reset();
+        setShowModal(false);
+      } else {
+        throw new Error('Booking failed');
+      }
+    } catch (err) {
       await Swal.fire({
-        icon: 'success',
-        title: 'Booking Successful!',
-        text: 'Your booking request has been submitted.',
+        icon: 'error',
+        title: 'Booking Failed',
+        text: err?.message || 'Something went wrong. Please try again.',
       });
-      form.reset();
-      setShowModal(false);
-    } else {
-      throw new Error('Booking failed');
+      console.error(err);
     }
-  } catch (err) {
-    await Swal.fire({
-      icon: 'error',
-      title: 'Booking Failed',
-      text: err?.message || 'Something went wrong. Please try again.',
-    });
-    console.error(err);
-  }
-};
+  };
 
   return (
     <div className="my-24 md:my-32 px-4 md:px-12">
