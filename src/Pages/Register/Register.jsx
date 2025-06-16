@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Lottie from 'lottie-react';
 import Swal from 'sweetalert2';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import RegisterLottie from '../../assets/register.json';
 import SocialLogin from '../Shared/SocialLogin';
 import { AuthContext } from '../../Contex/AuthProvider';
@@ -9,6 +9,9 @@ import { AuthContext } from '../../Contex/AuthProvider';
 const Register = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
+
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -40,7 +43,7 @@ const Register = () => {
       });
 
       form.reset();
-      navigate('/');
+      navigate(from, { replace: true });
     } catch (error) {
       await Swal.fire({
         icon: 'error',
@@ -69,7 +72,7 @@ const Register = () => {
                 <label className="label">
                   <span className="label-text">Name</span>
                 </label>
-                <input type="text" name="name" required placeholder="Full Name" className="input input-bordered w-full" />
+                <input type="text" name="name" required placeholder="Full Name" className="input input-bordered w-full"/>
               </div>
 
               <div>

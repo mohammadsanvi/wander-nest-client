@@ -10,6 +10,8 @@ import About from "../Pages/AbouUs/About";
 import PrivateRoute from "./PrivateRoute";
 import AddTourPackage from "../Pages/AddTourPackage/AddTourPackage";
 import AllPackages from "../Pages/Packages/AllPackages";
+import PackageDetails from "../Pages/Home/PackageDetails/packageDetails";
+import { param } from "framer-motion/client";
 
 const router = createBrowserRouter([
   {
@@ -44,7 +46,12 @@ const router = createBrowserRouter([
         path:"packages",
         Component:AllPackages,
         loader:() => fetch('http://localhost:3000/tour-packages')
-      }
+      },
+      {
+        path:"packages/package-details/:id",
+        element:<PrivateRoute><PackageDetails></PackageDetails></PrivateRoute>,
+        loader:({params}) => fetch(`http://localhost:3000/tour-packages/${params.id}`)
+            }
     ]
   },
 ]);

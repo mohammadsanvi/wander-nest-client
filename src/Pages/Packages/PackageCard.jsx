@@ -1,10 +1,9 @@
 import React from "react";
 import { FaUserTie, FaClock, FaCalendarAlt, FaMoneyBillWave } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { NavLink } from "react-router";
 
-const PackageCard = ({ pkg, isLoggedIn }) => {
-  const navigate = useNavigate();
+const PackageCard = ({ pkg }) => {
 
   const {
     _id,
@@ -17,13 +16,6 @@ const PackageCard = ({ pkg, isLoggedIn }) => {
     departure_date,
   } = pkg;
 
-  const handleViewDetails = () => {
-    if (isLoggedIn) {
-      navigate(`/packages/${_id}`);
-    } else {
-      navigate("/login");
-    }
-  };
 
   return (
     <motion.div
@@ -65,12 +57,7 @@ const PackageCard = ({ pkg, isLoggedIn }) => {
         </div>
 
         <div className="card-actions justify-end">
-          <button
-            className="btn btn-primary btn-sm"
-            onClick={handleViewDetails}
-          >
-            View Details
-          </button>
+          <NavLink to={`/packages/package-details/${_id}`} className="btn btn-primary btn-sm">View Details</NavLink>
         </div>
       </div>
     </motion.div>

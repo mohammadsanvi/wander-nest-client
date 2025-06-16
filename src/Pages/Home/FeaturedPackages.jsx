@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa";
 import axios from "axios";
@@ -60,12 +60,7 @@ const FeaturedPackages = () => {
               </div>
 
               <div className="card-actions mt-4">
-                <button
-                  onClick={() => navigate(`/package/${pkg._id}`)}
-                  className="btn btn-sm btn-primary w-full"
-                >
-                  View Details
-                </button>
+                <Link  className="btn btn-sm btn-primary w-full" to={`/packages/package-details/${pkg._id}`}>View Details</Link>
               </div>
             </div>
           </motion.div>
@@ -74,7 +69,7 @@ const FeaturedPackages = () => {
 
       <div className="mt-10 text-center">
         <button
-          onClick={() => navigate("/all-packages")}
+          onClick={() => navigate("/packages")}
           className="btn btn-outline btn-primary"
         >
           Show All <FaArrowRight className="ml-2" />

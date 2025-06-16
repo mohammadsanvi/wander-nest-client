@@ -80,7 +80,7 @@ const Login = () => {
 
             <p className="text-sm text-center mt-4">
               Don’t have an account?{" "}
-              <Link to="/register" className="link link-primary">Register</Link>
+              <Link to="/register" className="link link-primary" state={{ from: location.state?.from || { pathname: '/' } }}>Register</Link>
             </p>
           </div>
         </div>
