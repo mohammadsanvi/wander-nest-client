@@ -2,9 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
 import errorAnimation from "../../assets/Error.json";
+import { Helmet } from "react-helmet-async";
 
 const NotFoundPage = () => {
   return (
+   <>
+   <Helmet><title>Error - WanderNest</title></Helmet>
     <div className="min-h-screen flex flex-col items-center justify-center text-center px-4 bg-base-100 text-base-content">
       <div className="w-[300px] md:w-[400px]">
         <Lottie animationData={errorAnimation} loop={true} />
@@ -19,6 +22,7 @@ const NotFoundPage = () => {
         Back to Home
       </Link>
     </div>
+   </>
   );
 };
 

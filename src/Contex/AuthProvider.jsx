@@ -62,10 +62,16 @@ const AuthProvider = ({ children }) => {
       if (currentUser?.email) {
         const userData = { email: currentUser.email };
 
-        axios.post('http://localhost:3000/jwt', userData, {
-          withCredentials: true
-        })
-          .then(res => (res))
+        axios.post(
+          'https://wander-nest-server.vercel.app/jwt',
+          userData,
+          {
+            withCredentials: true,
+          }
+        )
+          .then(res => {
+            console.log('JWT response:', res.data);
+          })
           .catch(err => {
             console.error("JWT Error:", err);
           });

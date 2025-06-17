@@ -38,7 +38,7 @@ const Navbar = () => {
         logOut()
         try {
           const res = await axios.post(
-            'http://localhost:3000/logout',
+            'https://wander-nest-server.vercel.app/logout',
             {},
             { withCredentials: true }
           );

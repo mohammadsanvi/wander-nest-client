@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaMapMarkedAlt, FaPhoneAlt, FaSmileBeam } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 const teamMembers = [
   {
@@ -27,6 +28,8 @@ const teamMembers = [
 
 const About = () => {
   return (
+    <>
+     <Helmet><title>About Us - WanderNest</title></Helmet>
     <div className="min-h-screen bg-base-100 text-base-content mt-10 py-20 px-6 md:px-20">
       <div className="max-w-7xl mx-auto space-y-24">
 
@@ -183,6 +186,7 @@ const About = () => {
 
       </div>
     </div>
+    </>
   );
 };
 

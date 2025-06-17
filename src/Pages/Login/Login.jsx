@@ -5,6 +5,7 @@ import Lottie from 'lottie-react';
 import SocialLogin from '../Shared/SocialLogin';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../Contex/AuthProvider';
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
   const { user,loginUser } = useContext(AuthContext);
@@ -30,7 +31,7 @@ const Login = () => {
 
       const loggedUser = { email: result.user.email }; 
 
-      fetch("http://localhost:3000/jwt", {
+      fetch("https://wander-nest-server.vercel.app/jwt", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,7 +50,9 @@ const Login = () => {
 
 
   return (
-    <div className="hero min-h-screen bg-base-200">
+  <>
+  <Helmet><title>Login - WanderNest</title></Helmet>
+    <div className="hero min-h-screen my-4 md:my-20 bg-base-200">
       <div className="hero-content flex-col lg:flex-row gap-10">
         {/* Lottie Animation */}
         <div className="w-full max-w-md">
@@ -101,6 +104,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+  </>
   );
 };
 

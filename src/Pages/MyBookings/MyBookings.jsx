@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../Contex/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 
 const MyBookings = () => {
@@ -12,7 +13,7 @@ const MyBookings = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:3000/bookings?email=${user.email}`, {
+        .get(`https://wander-nest-server.vercel.app/bookings?email=${user.email}`, {
           withCredentials: true
         })
         .then((res) => setBookings(res.data))
@@ -23,7 +24,7 @@ const MyBookings = () => {
   const handleConfirm = async (id) => {
     try {
      const response = await axios.put(
-      `http://localhost:3000/bookings/${id}`,
+      `https://wander-nest-server.vercel.app/bookings/${id}`,
       { status: "completed" },
       { withCredentials: true }   
     );
@@ -48,6 +49,8 @@ const MyBookings = () => {
   }
 
   return (
+   <>
+   <Helmet><title>My Bookings - WanderNest</title></Helmet>
     <div className="px-4 md:px-10 lg:px-20 my-20">
       <h2 className="text-3xl font-bold text-center mb-8">My Bookings</h2>
 
@@ -98,6 +101,7 @@ const MyBookings = () => {
         </div>
       )}
     </div>
+   </>
   );
 };
 

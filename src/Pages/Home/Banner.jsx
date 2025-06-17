@@ -9,7 +9,7 @@ const Banner = () => {
   className="relative min-h-[100vh] flex items-center justify-center bg-cover bg-center bg-no-repeat"
   style={{
     backgroundImage:
-      "url('https://i.ibb.co/jkH5Jdbg/pexels-thanh-long-bui-483143920-32572725.jpg')",
+      "url('https://i.ibb.co/Pz9qTPsQ/philipp-kammerer-6-Mxb-m-Z-Q8-E-unsplash.jpg')"
   }}
 >
   {/* Dark overlay */}

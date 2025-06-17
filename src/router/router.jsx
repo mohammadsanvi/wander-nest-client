@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         path: "add-package",
         element: (
           <PrivateRoute>
-            <AddTourPackage />
+            <AddTourPackage></AddTourPackage>
           </PrivateRoute>
         )
       },
@@ -63,12 +63,12 @@ const router = createBrowserRouter([
       {
         path: "packages",
         Component: AllPackages,
-        loader: () => fetch('http://localhost:3000/tour-packages')
+        loader: () => fetch('https://wander-nest-server.vercel.app/tour-packages', { credentials: 'include' })
       },
       {
         path: "packages/package-details/:id",
         element: <PrivateRoute><PackageDetails></PackageDetails></PrivateRoute>,
-        loader: ({ params }) => fetch(`http://localhost:3000/tour-packages/${params.id}`)
+        loader: ({ params }) => fetch(`https://wander-nest-server.vercel.app/tour-packages/${params.id}`, { credentials: 'include' })
       }
     ]
   },

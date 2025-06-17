@@ -5,10 +5,12 @@ import DownloadAppCTA from './DownloadAppCTA';
 import CustomerTestimonials from './CustomerTestimonials';
 import ExploreSection from './ExploreSection';
 import FeaturedPackages from './FeaturedPackages';
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
         return (
                 <>
+                <Helmet><title>Home - WanderNest</title></Helmet>
                         <Banner></Banner>
                         <FeaturedPackages></FeaturedPackages>
                         <WhyChooseUs></WhyChooseUs>

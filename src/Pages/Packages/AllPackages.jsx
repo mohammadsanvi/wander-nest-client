@@ -5,6 +5,7 @@ import PackageCard from "./PackageCard";
 import { FaSearch } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { FaEarthAmericas } from "react-icons/fa6";
+import { Helmet } from "react-helmet-async";
 
 const AllPackages = ({ isLoggedIn }) => {
   const initialData = useLoaderData();
@@ -22,7 +23,7 @@ const AllPackages = ({ isLoggedIn }) => {
     }
 
     axios
-      .get(`http://localhost:3000/tour-packages?name=${searchTerm}`)
+      .get(`https://wander-nest-server.vercel.app/tour-packages?name=${searchTerm}`, { credentials: 'include' })
       .then((res) => {
         setSuggestions(res.data);
       })
@@ -37,7 +38,7 @@ const AllPackages = ({ isLoggedIn }) => {
 
     setLoading(true);
     axios
-      .get(`http://localhost:3000/tour-packages?name=${searchTerm}`)
+      .get(`https://wander-nest-server.vercel.app/tour-packages?name=${searchTerm}`, { credentials: 'include' })
       .then((res) => {
         setPackages(res.data);
         setLoading(false);
@@ -51,7 +52,7 @@ const AllPackages = ({ isLoggedIn }) => {
 
     setLoading(true);
     axios
-      .get(`http://localhost:3000/tour-packages?name=${name}`)
+      .get(`https://wander-nest-server.vercel.app/tour-packages?name=${name}`, { credentials: 'include' })
       .then((res) => {
         setPackages(res.data);
         setLoading(false);
@@ -68,6 +69,8 @@ const AllPackages = ({ isLoggedIn }) => {
   }
 
   return (
+   <>
+    <Helmet><title>All Packages - WanderNest</title></Helmet>
     <div className="px-4 md:px-10 lg:px-20 my-24">
       <h1 className="text-3xl font-bold mb-8 text-center flex justify-center items-center gap-4">
         <FaEarthAmericas size={40} /> <span>All Tour Packages</span>
@@ -139,6 +142,7 @@ const AllPackages = ({ isLoggedIn }) => {
           ))}
       </motion.div>
     </div>
+   </>
   );
 };
 

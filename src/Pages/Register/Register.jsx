@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import RegisterLottie from '../../assets/register.json';
 import SocialLogin from '../Shared/SocialLogin';
 import { AuthContext } from '../../Contex/AuthProvider';
+import { Helmet } from 'react-helmet-async';
 
 const Register = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
@@ -54,7 +55,9 @@ const Register = () => {
   };
 
   return (
-    <div className="hero min-h-screen bg-base-200 text-base-content pt-4">
+   <>
+   <Helmet><title>Register - WanderNest</title></Helmet>
+    <div className="hero min-h-screen my-4 lg:my-20 bg-base-200 text-base-content pt-4">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Animation Side */}
@@ -120,6 +123,7 @@ const Register = () => {
         </div>
       </div>
     </div>
+   </>
   );
 };
 

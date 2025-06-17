@@ -3,6 +3,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { AuthContext } from "../../../Contex/AuthProvider";
+import { Helmet } from "react-helmet-async";
 
 const ManageMyPackages = () => {
   const { user } = useContext(AuthContext);
@@ -16,7 +17,7 @@ const ManageMyPackages = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:3000/tour-packages?guideEmail=${user.email}`,{
+        .get(`https://wander-nest-server.vercel.app/tour-packages?guideEmail=${user.email}`,{
           withCredentials:true
         })
         .then((res) => setMyPackages(res.data))
@@ -35,7 +36,7 @@ const ManageMyPackages = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:3000/tour-packages/${id}`,{
+        axios.delete(`https://wander-nest-server.vercel.app/tour-packages/${id}`,{
           withCredentials:true
         }).then(() => {
           setMyPackages(myPackages.filter((pkg) => pkg._id !== id));
@@ -70,7 +71,7 @@ const ManageMyPackages = () => {
         guide_photo: editPackage.guide_photo,
       };
 
-      const res = await axios.patch(`http://localhost:3000/tour-packages/${editPackage._id}`, updatedData,{
+      const res = await axios.patch(`https://wander-nest-server.vercel.app/tour-packages/${editPackage._id}`, updatedData,{
           withCredentials:true
         });
 
@@ -100,6 +101,8 @@ const ManageMyPackages = () => {
   }
 
   return (
+    <>
+    <Helmet><title>Manage My Packages - WanderNest</title></Helmet>
     <div className="px-4 md:px-10 lg:px-20 my-20">
       <h2 className="text-3xl font-bold text-center mb-8">Manage My Packages</h2>
 
@@ -247,6 +250,7 @@ const ManageMyPackages = () => {
         </dialog>
       )}
     </div>
+    </>
   );
 };
 

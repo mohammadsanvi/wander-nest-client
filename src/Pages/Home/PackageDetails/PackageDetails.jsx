@@ -6,6 +6,7 @@ import { MdLocationOn, MdDateRange } from "react-icons/md";
 import { AuthContext } from './../../../Contex/AuthProvider';
 import axios from "axios";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const PackageDetails = () => {
   const loadedData = useLoaderData();
@@ -49,7 +50,7 @@ const PackageDetails = () => {
     };
 
     try {
-      const res = await axios.post("http://localhost:3000/bookings", bookingData,{
+      const res = await axios.post("https://wander-nest-server.vercel.app/bookings", bookingData,{
         withCredentials:true
       });
 
@@ -60,7 +61,7 @@ const PackageDetails = () => {
           text: 'Your booking request has been submitted.',
         });
 
-        const updated = await axios.get(`http://localhost:3000/tour-packages/${_id}`);
+        const updated = await axios.get(`https://wander-nest-server.vercel.app/tour-packages/${_id}`);
         setData(updated.data);
         
         form.reset();
@@ -79,6 +80,8 @@ const PackageDetails = () => {
   };
 
   return (
+    <>
+    <Helmet><title>{tour_name} Details</title></Helmet>
     <div className="my-24 md:my-32 px-4 md:px-12">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         <img
@@ -211,6 +214,7 @@ const PackageDetails = () => {
         </dialog>
       )}
     </div>
+    </>
   );
 };
 

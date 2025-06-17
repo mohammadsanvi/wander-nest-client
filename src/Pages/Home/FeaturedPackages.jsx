@@ -10,24 +10,25 @@ const FeaturedPackages = () => {
   const [loading, setloading] = useState(true)
 
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/tour-packages")
-      .then((res) => {
-        const firstSix = res.data.slice(0, 6);
-        setPackages(firstSix);
-        setloading(false)
-      })
-      .catch((err) => console.error(err));
-  }, []);
+useEffect(() => {
+  axios
+    .get("https://wander-nest-server.vercel.app/tour-packages", { withCredentials: true })
+    .then((res) => {
+      const firstSix = res.data.slice(0, 6);
+      setPackages(firstSix);
+      setloading(false);
+    })
+    .catch((err) => console.error(err));
+}, []);
 
-   if (loading) {
-    return (
-      <div className="min-h-[50vh] flex justify-center items-center">
-        <span className="loading loading-spinner loading-lg text-primary"></span>
-      </div>
-    );
-  }
+if (loading) {
+  return (
+    <div className="min-h-[50vh] flex justify-center items-center">
+      <span className="loading loading-spinner loading-lg text-primary"></span>
+    </div>
+  );
+}
+
 
   return (
     <section className="py-16 px-4 md:px-10 lg:px-20 bg-base-100 text-base-content">
