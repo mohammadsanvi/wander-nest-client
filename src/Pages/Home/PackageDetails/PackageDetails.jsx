@@ -49,7 +49,9 @@ const PackageDetails = () => {
     };
 
     try {
-      const res = await axios.post("http://localhost:3000/bookings", bookingData);
+      const res = await axios.post("http://localhost:3000/bookings", bookingData,{
+        withCredentials:true
+      });
 
       if (res.data.insertedId) {
         await Swal.fire({

@@ -22,7 +22,9 @@ const TourPackageForm = () => {
     try {
       const response = await axios.post(
         "http://localhost:3000/tour-packages",
-        data
+        data,{
+          withCredentials:true
+        }
       );
       if (response.data.insertedId) {
         Swal.fire({

@@ -12,7 +12,9 @@ const MyBookings = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:3000/bookings?email=${user.email}`)
+        .get(`http://localhost:3000/bookings?email=${user.email}`, {
+          withCredentials: true
+        })
         .then((res) => setBookings(res.data))
         .finally(() => setLoading(false));
     }
@@ -20,9 +22,11 @@ const MyBookings = () => {
 
   const handleConfirm = async (id) => {
     try {
-      const response = await axios.put(`http://localhost:3000/bookings/${id}`, {
-        status: "completed",
-      });
+     const response = await axios.put(
+      `http://localhost:3000/bookings/${id}`,
+      { status: "completed" },
+      { withCredentials: true }   
+    );
 
       if (response.data.modifiedCount > 0) {
         Swal.fire("Success!", "Booking confirmed!", "success");

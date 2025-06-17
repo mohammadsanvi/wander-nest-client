@@ -2,36 +2,51 @@ import React, { useContext } from 'react';
 import Swal from 'sweetalert2';
 import loginLottie from '../../assets/login.json';
 import Lottie from 'lottie-react';
-import { AuthContext } from '../../Contex/AuthProvider';
 import SocialLogin from '../Shared/SocialLogin';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { AuthContext } from '../../Contex/AuthProvider';
 
 const Login = () => {
-  const { loginUser } = useContext(AuthContext);
+  const { user,loginUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
 
   const handleLogin = e => {
-    e.preventDefault();
-    const form = e.target;
-    const email = form.email.value.trim();
-    const password = form.password.value.trim();
+  e.preventDefault();
+  const form = e.target;
+  const email = form.email.value.trim();
+  const password = form.password.value.trim();
 
-    if (!email || !password) {
-      Swal.fire("Warning", "Please fill in all fields", "warning");
-      return;
-    }
+  if (!email || !password) {
+    Swal.fire("Warning", "Please fill in all fields", "warning");
+    return;
+  }
 
-    loginUser(email, password)
-      .then(() => {
-        Swal.fire("Success!", "Login Successful", "success");
-        navigate(from, { replace: true });
+  loginUser(email, password)
+    .then(result => {
+      Swal.fire("Success!", "Login Successful", "success");
+      navigate(from, { replace: true });
+
+      const loggedUser = { email: result.user.email }; 
+
+      fetch("http://localhost:3000/jwt", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loggedUser),
       })
-      .catch(error => {
-        Swal.fire("Error!", error.message, "error");
-      });
-  };
+        .then(res => res.json())
+        .then(data => {
+          localStorage.setItem("wander-token", data.token);
+        });
+    })
+    .catch(error => {
+      Swal.fire("Error!", error.message, "error");
+    });
+};
+
 
   return (
     <div className="hero min-h-screen bg-base-200">

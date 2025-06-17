@@ -1,11 +1,12 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
 import { AuthContext } from "../../Contex/AuthProvider";
 import { useThemeToggle } from "../../Contex/ThemeContext";
 import Swal from 'sweetalert2';
 import ThemeToggle from "../Shared/ThemeToggle";
 import NavItem from "../Shared/NavItem";
+import axios from "axios";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -23,7 +24,7 @@ const Navbar = () => {
     theme === "dark" ? "bg-[#1e293b] text-white" : "bg-white text-gray-900";
   const hoverBg = theme === "dark" ? "hover:bg-gray-700" : "hover:bg-blue-100";
 
-  const handleLogout = () => {
+   const handleLogout = async () => {
     Swal.fire({
       title: 'Are you sure?',
       text: "You want to logout!",
@@ -32,17 +33,28 @@ const Navbar = () => {
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, logout',
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
         logOut()
-          .then(() => {
+        try {
+          const res = await axios.post(
+            'http://localhost:3000/logout',
+            {},
+            { withCredentials: true }
+          );
+
+          if (res.data.success) {
+            await logOut(); // optional if you use Firebase
             setIsOpen(false);
-            Swal.fire('Logged Out!', 'You have been logged out successfully.', 'success');
-          })
-          .catch((error) => {
-            console.error(error);
-            Swal.fire('Oops!', 'Something went wrong during logout.', 'error');
-          });
+            localStorage.removeItem("wander-token");
+
+            await Swal.fire('Logged Out!', 'You have been logged out successfully.', 'success');
+
+          }
+        } catch (error) {
+          console.error('Logout failed', error);
+          Swal.fire('Oops!', 'Something went wrong during logout.', 'error');
+        }
       }
     });
   };
@@ -68,7 +80,7 @@ const Navbar = () => {
           <li><NavItem to="/about" label="About Us" /></li>
           {user && <li><NavItem to="/my-bookings" label="My Bookings" /></li>}
           {!user ? (
-            <li className="btn btn-primary"><NavItem to="/login" label="Login"/></li>
+            <li className="btn btn-primary"><NavItem to="/login" label="Login" /></li>
           ) : (
             <li className="relative">
               <div className="dropdown dropdown-end">

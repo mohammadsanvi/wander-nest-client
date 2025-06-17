@@ -11,12 +11,14 @@ const ManageMyPackages = () => {
 
   const [showModal, setShowModal] = useState(false);
   const [editPackage, setEditPackage] = useState(null);
-  console.log(editPackage)
+  // console.log(editPackage)
 
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:3000/tour-packages?guideEmail=${user.email}`)
+        .get(`http://localhost:3000/tour-packages?guideEmail=${user.email}`,{
+          withCredentials:true
+        })
         .then((res) => setMyPackages(res.data))
         .finally(() => setLoading(false));
     }
@@ -33,7 +35,9 @@ const ManageMyPackages = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:3000/tour-packages/${id}`).then(() => {
+        axios.delete(`http://localhost:3000/tour-packages/${id}`,{
+          withCredentials:true
+        }).then(() => {
           setMyPackages(myPackages.filter((pkg) => pkg._id !== id));
           Swal.fire("Deleted!", "Your tour package has been deleted.", "success");
         });
@@ -66,7 +70,9 @@ const ManageMyPackages = () => {
         guide_photo: editPackage.guide_photo,
       };
 
-      const res = await axios.patch(`http://localhost:3000/tour-packages/${editPackage._id}`, updatedData);
+      const res = await axios.patch(`http://localhost:3000/tour-packages/${editPackage._id}`, updatedData,{
+          withCredentials:true
+        });
 
       if (res.data.modifiedCount > 0) {
         Swal.fire("Success", "Tour package updated successfully!", "success");
