@@ -41,6 +41,54 @@
 
 ---
 
+## 🛠️ Tools & Libraries Used
+= WanderNest has been built using a combination of modern frontend and backend technologies, tools, and libraries to ensure scalability, security, and a smooth user experience.
+
+## 🧑‍💻 Development & Frontend
+Vite – Fast and modern frontend build tool
+
+React.js – Component-based UI library
+
+React Router – SPA-style routing solution
+
+Tailwind CSS – Utility-first CSS framework for styling
+
+DaisyUI – Tailwind component library for prebuilt, themeable UI
+
+## 🔐 Authentication & Security
+
+Firebase Authentication – Email/Password & Google login system
+
+JSON Web Tokens (JWT) – Secure API access with token-based auth
+
+Express.js Middleware – Protecting private API routes
+
+## 📦 Backend & Database
+
+Node.js & Express.js – REST API server
+
+MongoDB Atlas – Cloud-based NoSQL database
+
+Mongoose – MongoDB ODM for schema-based modeling
+
+## ⚙️ UI & UX Enhancements
+
+React Toastify – Non-blocking toast notifications
+
+SweetAlert2 – Stylish and interactive alert dialogs
+
+React Icons – Icon support throughout the UI
+
+Responsive Design – Mobile-first, adaptive layout
+
+## 🚀 Deployment
+
+Client – Hosted on Firebase Hosting
+
+Server – Deployed via Vercel
+
+---
+
 ## 🧱 Tech Stack
 
 | Layer           | Tech Used                             |
@@ -118,12 +166,13 @@
 ---
 
 ### .env.local File like this
-VITE_APIKEY=your_api_key_here
-VITE_AUTHDOMAIN=your_project_id.firebaseapp.com
-VITE_PROJECTID=your_project_id
-VITE_STORAGEBUCKET=your_project_id.appspot.com
-VITE_MESSAGINGSENDERID=your_sender_id
-VITE_APPID=your_app_id_here
+
+- VITE_APIKEY=your_api_key_here
+- VITE_AUTHDOMAIN=your_project_id.firebaseapp.com
+- VITE_PROJECTID=your_project_id
+- VITE_STORAGEBUCKET=your_project_id.appspot.com
+- VITE_MESSAGINGSENDERID=your_sender_id
+- VITE_APPID=your_app_id_here
 
 ### 1. Clone the Repository
 
