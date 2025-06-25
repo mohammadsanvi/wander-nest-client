@@ -9,7 +9,7 @@
 ## 🌐 Live Links
 
 - 🚀 **Live Website**: [https://wandernest-63f5d.web.app](https://wandernest-63f5d.web.app)
-- 🖥️ **Backend API**: [https://wander-nest-server.vercel.app](https://wander-nest-server.vercel.app)
+- 🖥️ **Backend LInk**: [https://wander-nest-server.vercel.app](https://wander-nest-server.vercel.app)
 
 ---
 
@@ -116,3 +116,18 @@
 - Booking confirmation status (Pending ➜ Completed).
 
 ---
+
+### .env.local File like this
+VITE_APIKEY=your_api_key_here
+VITE_AUTHDOMAIN=your_project_id.firebaseapp.com
+VITE_PROJECTID=your_project_id
+VITE_STORAGEBUCKET=your_project_id.appspot.com
+VITE_MESSAGINGSENDERID=your_sender_id
+VITE_APPID=your_app_id_here
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/mohammadsanvi/wander-nest-client.git
+cd wander-nest-client
+npm run dev
