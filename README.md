@@ -31,15 +31,6 @@
 
 ---
 
-## 🔐 Authentication
-
-- Firebase Authentication (Email/Password & Google)
-- Auth persistence across reloads (no auto redirect to login).
-- JWT issued and stored in **localStorage**.
-- JWT verified in backend for all protected APIs.
-- Private Routes: Add Package, Manage My Packages, My Bookings, Package Details.
-
----
 
 ## 🛠️ Tools & Libraries Used
 = WanderNest has been built using a combination of modern frontend and backend technologies, tools, and libraries to ensure scalability, security, and a smooth user experience.
