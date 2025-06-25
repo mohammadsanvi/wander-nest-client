@@ -129,6 +129,16 @@ Server – Deployed via Vercel
 
 ---
 
+## 📸 UI Screenshot
+
+![WanderNest UI](https://i.ibb.co/LdH507P1/image.png)
+![WanderNest UI](https://i.ibb.co/zVfkfQD8/image.png)
+![WanderNest UI](https://i.ibb.co/jPRwxchm/image.png)
+
+
+
+---
+
 ## 📦 Dynamic Data
 
 - All data is dynamically fetched from MongoDB via Express API.
