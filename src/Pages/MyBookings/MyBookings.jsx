@@ -51,7 +51,7 @@ const MyBookings = () => {
   return (
    <>
    <Helmet><title>My Bookings - WanderNest</title></Helmet>
-    <div className="px-4 md:px-10 lg:px-20 my-20">
+    <div className="px-4 min-h-[80vh] md:px-10 lg:px-20 my-20">
       <h2 className="text-3xl font-bold text-center mb-8">My Bookings</h2>
 
       {bookings.length === 0 ? (

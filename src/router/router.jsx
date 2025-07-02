@@ -16,6 +16,7 @@ import MyBookings from "../Pages/MyBookings/MyBookings";
 import Error from "../Pages/ErrrorPage/Error";
 import FAQ from "../Pages/Home/Faq";
 import Contact from "../Pages/Contact/Contact";
+import PackageErrorFallback from "../Pages/ErrrorPage/PackageErrorFallback";
 
 const router = createBrowserRouter([
   {
@@ -65,7 +66,14 @@ const router = createBrowserRouter([
       {
         path: "packages",
         Component: AllPackages,
-        loader: () => fetch('https://wander-nest-server.vercel.app/tour-packages', { credentials: 'include' })
+        loader: async () => {
+          const res = await fetch('https://wander-nest-server.vercel.app/tour-packages', { credentials: 'include' });
+          if (!res.ok) {
+            throw new Error("Failed to load tour packages");
+          }
+          return res.json();
+        },
+        errorElement: <PackageErrorFallback></PackageErrorFallback>
       },
       {
         path: "packages/package-details/:id",
@@ -73,18 +81,18 @@ const router = createBrowserRouter([
         loader: ({ params }) => fetch(`https://wander-nest-server.vercel.app/tour-packages/${params.id}`, { credentials: 'include' })
       },
       {
-        path:'contact',
-        Component:Contact
+        path: 'contact',
+        Component: Contact
       },
       {
-        path:'faq',
-        Component:FAQ
+        path: 'faq',
+        Component: FAQ
       }
     ]
   },
   {
     path: "*",
-    Component:Error
+    Component: Error
   },
 ]);
 

@@ -58,7 +58,7 @@ const TourPackageForm = () => {
     <>
       <Helmet><title>Add New Tour Package - WanderNest</title></Helmet>
 
-      <div className="max-w-3xl mx-auto p-8 my-24 rounded-box shadow-lg bg-base-100">
+      <div className="max-w-3xl min-h-[80vh] mx-auto p-8 my-24 rounded-box shadow-lg bg-base-100">
         <div className="mb-8 text-center">
           <h1 className="text-4xl font-bold mb-2">Add Tour Package</h1>
           <p className="text-base-content">
