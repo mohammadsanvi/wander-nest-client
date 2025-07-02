@@ -43,6 +43,8 @@ const FAQ = () => {
   };
 
   return (
+   <>
+     <Helmet><title>Faq - WanderNest</title></Helmet>
    <section className="py-20 min-h-[90vh] bg-base-200 text-base-content">
   <div className="max-w-7xl mx-auto bg-base-200 px-6">
     <h2 className="text-4xl font-bold text-center mb-12">
@@ -82,6 +84,7 @@ const FAQ = () => {
     </div>
   </div>
 </section>
+   </>
 
   );
 };

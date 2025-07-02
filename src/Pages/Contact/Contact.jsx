@@ -5,6 +5,8 @@ import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 
 const Contact = () => {
   return (
+   <>
+    <Helmet><title>Contact - WanderNest</title></Helmet>
     <section className="max-w-7xl min-h-[80vh] bg-base-200 mx-auto px-4 py-24">
       <motion.h2
         className="text-4xl md:text-5xl font-bold text-center mb-12 text-primary"
@@ -124,6 +126,7 @@ const Contact = () => {
         </motion.div>
       </div>
     </section>
+   </>
   );
 };
 
