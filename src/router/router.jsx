@@ -14,6 +14,8 @@ import PackageDetails from "../Pages/Home/PackageDetails/packageDetails";
 import ManageMyPackages from "../Pages/AbouUs/MyPackages/ManageMyPackages";
 import MyBookings from "../Pages/MyBookings/MyBookings";
 import Error from "../Pages/ErrrorPage/Error";
+import FAQ from "../Pages/Home/Faq";
+import Contact from "../Pages/Contact/Contact";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +71,14 @@ const router = createBrowserRouter([
         path: "packages/package-details/:id",
         element: <PrivateRoute><PackageDetails></PackageDetails></PrivateRoute>,
         loader: ({ params }) => fetch(`https://wander-nest-server.vercel.app/tour-packages/${params.id}`, { credentials: 'include' })
+      },
+      {
+        path:'contact',
+        Component:Contact
+      },
+      {
+        path:'faq',
+        Component:FAQ
       }
     ]
   },

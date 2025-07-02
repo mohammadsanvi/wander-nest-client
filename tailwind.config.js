@@ -15,7 +15,7 @@ export default {
       "dark",
       {
         wanderNestTheme: {
-          "primary": "#2563eb",
+          "primary": "#ed2424",
           "secondary": "#64748b",
           "accent": "#fbbf24",
           "neutral": "#1e293b",

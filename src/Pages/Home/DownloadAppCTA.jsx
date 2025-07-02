@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const DownloadAppCTA = () => {
   return (
-    <section className="py-20 bg-base-200 text-base-content">
+    <section className="py-20 bg-base-200 text-base-content mx-auto max-w-7xl">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}

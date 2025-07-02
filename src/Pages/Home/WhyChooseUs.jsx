@@ -22,7 +22,7 @@ const features = [
 
 const WhyChooseUs = () => {
   return (
-    <section className="py-16 bg-base-200 text-base-content">
+    <section className="py-20 bg-base-200 text-base-content mx-auto max-w-7xl">
       <div className="max-w-6xl mx-auto px-6">
         <motion.h2
           className="text-4xl font-bold text-center mb-4"

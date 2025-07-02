@@ -23,7 +23,7 @@ useEffect(() => {
 
 if (loading) {
   return (
-    <div className="min-h-[50vh] flex justify-center items-center">
+    <div className="min-h-[40vh] flex justify-center items-center">
       <span className="loading loading-spinner loading-lg text-primary"></span>
     </div>
   );
@@ -31,7 +31,7 @@ if (loading) {
 
 
   return (
-    <section className="py-16 px-4 md:px-10 lg:px-20 bg-base-100 text-base-content">
+    <section className="py-20 px-4 bg-base-200 text-base-content mx-auto max-w-7xl">
       <div className="text-center mb-10">
         <h2 className="text-4xl font-bold mb-2">Featured Packages</h2>
         <p className="text-sm opacity-70">Explore our top-rated tour experiences</p>

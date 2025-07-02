@@ -71,7 +71,7 @@ const AllPackages = ({ isLoggedIn }) => {
   return (
    <>
     <Helmet><title>All Packages - WanderNest</title></Helmet>
-    <div className="px-4 md:px-10 lg:px-20 my-24">
+    <div className="px-4 min-h-[70] my-24 max-w-7xl mx-auto">
       <h1 className="text-3xl font-bold mb-8 text-center flex justify-center items-center gap-4">
         <FaEarthAmericas size={40} /> <span>All Tour Packages</span>
       </h1>

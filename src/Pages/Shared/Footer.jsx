@@ -18,7 +18,7 @@ const paymentIcons = [
 
 const Footer = () => {
   return (
-    <footer className="bg-base-100 text-base-content py-12 px-6 md:px-20">
+    <footer className="bg-base-100 text-base-content py-12 px-6 md:px-20 shadow-2xl">
       <div className="max-w-7xl mx-auto grid gap-10 md:grid-cols-4">
 
         {/* Discover Links */}

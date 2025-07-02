@@ -20,7 +20,7 @@ const destinations = [
 
 const ExploreSection = () => {
   return (
-    <section className="px-6 md:px-20 py-12 bg-base-200 text-base-content">
+    <section className="px-4 py-20 bg-base-200 text-base-content mx-auto max-w-7xl">
       <div className="mb-10">
         <h2 className="text-3xl md:text-4xl font-bold">Explore Bangladesh</h2>
         <p className="mt-2 max-w-3xl">

@@ -1,30 +1,24 @@
 import React, { useContext, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
 import { AuthContext } from "../../Contex/AuthProvider";
 import { useThemeToggle } from "../../Contex/ThemeContext";
 import Swal from 'sweetalert2';
 import ThemeToggle from "../Shared/ThemeToggle";
-import NavItem from "../Shared/NavItem";
 import axios from "axios";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const { theme } = useThemeToggle();
   const [isOpen, setIsOpen] = useState(false);
-  // const [scrolled, setScrolled] = useState(false);
 
-
-
-  // Dynamic class
-  const navClass = `fixed top-0 left-0 w-full z-50 transition-all duration-300 shadow-md ${theme === 'dark' ? 'bg-base-100 text-white' : 'bg-white text-gray-900'
-    }`;
+  const navClass = `fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-base-100/50 backdrop-blur-md shadow-sm`;
 
   const dropdownBg =
     theme === "dark" ? "bg-[#1e293b] text-white" : "bg-white text-gray-900";
   const hoverBg = theme === "dark" ? "hover:bg-gray-700" : "hover:bg-blue-100";
 
-   const handleLogout = async () => {
+  const handleLogout = async () => {
     Swal.fire({
       title: 'Are you sure?',
       text: "You want to logout!",
@@ -35,21 +29,17 @@ const Navbar = () => {
       confirmButtonText: 'Yes, logout',
     }).then(async (result) => {
       if (result.isConfirmed) {
-        logOut()
         try {
+          await logOut();
           const res = await axios.post(
             'https://wander-nest-server.vercel.app/logout',
             {},
             { withCredentials: true }
           );
-
           if (res.data.success) {
-            await logOut(); // optional if you use Firebase
             setIsOpen(false);
             localStorage.removeItem("wander-token");
-
             await Swal.fire('Logged Out!', 'You have been logged out successfully.', 'success');
-
           }
         } catch (error) {
           console.error('Logout failed', error);
@@ -59,9 +49,17 @@ const Navbar = () => {
     });
   };
 
+  const links = [
+    { to: "/", label: "Home" },
+    { to: "/packages", label: "All Packages" },
+    { to: "/about", label: "About Us" },
+    { to: "/contact", label: "Contact" },
+    { to: "/faq", label: "FAQ" },
+  ];
+
   return (
     <nav className={navClass}>
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+      <div className="container mx-auto px-4 py-3 flex justify-between items-center max-w-7xl">
         <Link
           to="/"
           className="flex items-center gap-2 text-2xl font-bold text-primary"
@@ -74,13 +72,44 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Nav */}
-        <ul className="hidden md:flex items-center gap-6 font-medium">
-          <li><NavItem to="/" label="Home" /></li>
-          <li><NavItem to="/packages" label="All Packages" /></li>
-          <li><NavItem to="/about" label="About Us" /></li>
-          {user && <li><NavItem to="/my-bookings" label="My Bookings" /></li>}
+        <ul className={`hidden md:flex items-center gap-6 font-medium ${theme === "dark" ? "text-white" : "text-black"}`}>
+
+
+          {links.map(link => (
+            <li key={link.to}>
+              <NavLink
+                to={link.to}
+                onClick={() => setIsOpen(false)}
+                className={({ isActive }) =>
+                  `transition duration-200 ${isActive
+                    ? "font-semibold text-blue-400"
+                    : "hover:text-blue-600 dark:hover:text-blue-400"
+                  }`
+                }
+              >
+                {link.label}
+              </NavLink>
+            </li>
+          ))}
+          {user && (
+            <li>
+              <NavLink
+                to="/my-bookings"
+                className={({ isActive }) =>
+                  `transition duration-200 ${isActive
+                    ? "font-semibold text-blue-400"
+                    : "hover:text-blue-600 dark:hover:text-blue-400"
+                  }`
+                }
+              >
+                My Bookings
+              </NavLink>
+            </li>
+          )}
           {!user ? (
-            <li className="btn btn-primary"><NavItem to="/login" label="Login" /></li>
+            <li className="btn btn-primary">
+              <NavLink to="/login">Login</NavLink>
+            </li>
           ) : (
             <li className="relative">
               <div className="dropdown dropdown-end">
@@ -92,12 +121,9 @@ const Navbar = () => {
                     title={user.displayName || "User"}
                   />
                 </div>
-                <ul
-                  tabIndex={0}
-                  className={`menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52 ${dropdownBg}`}
-                >
-                  <li><NavItem to="/add-package" label="Add Package" /></li>
-                  <li><NavItem to="/manage-packages" label="Manage My Packages" /></li>
+                <ul className={`menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow rounded-box w-52 ${dropdownBg}`}>
+                  <li><NavLink to="/add-package">Add Package</NavLink></li>
+                  <li><NavLink to="/manage-packages">Manage My Packages</NavLink></li>
                   <li>
                     <button onClick={handleLogout} className={`w-full text-left px-4 py-2 ${hoverBg} rounded`}>
                       Logout
@@ -110,7 +136,7 @@ const Navbar = () => {
           <li><ThemeToggle /></li>
         </ul>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center gap-2">
           <ThemeToggle />
           <button onClick={() => setIsOpen(!isOpen)} className="text-2xl focus:outline-none">
@@ -119,24 +145,76 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       {isOpen && (
         <ul
-          className={`md:hidden px-6 pb-4 space-y-2 font-medium ${theme === "dark" ? "bg-[#0f172a] text-white" : "bg-white text-gray-00"}`}
+          className={`md:hidden px-6 py-4 space-y-2 font-medium ${theme === "dark" ? "bg-base-200 text-white" : "bg-white text-black"
+            }`}
         >
-          <li><NavItem to="/" label="Home" onClick={() => setIsOpen(false)} /></li>
-          <li><NavItem to="/packages" label="All Packages" onClick={() => setIsOpen(false)} /></li>
-          <li><NavItem to="/about" label="About Us" onClick={() => setIsOpen(false)} /></li>
-          {user && <li><NavItem to="/my-bookings" label="My Bookings" onClick={() => setIsOpen(false)} /></li>}
+          {links.map(link => (
+            <li key={link.to}>
+              <NavLink
+                to={link.to}
+                onClick={() => setIsOpen(false)}
+                className={({ isActive }) =>
+                  `transition duration-200 ${isActive
+                    ? "font-semibold text-blue-400"
+                    : "hover:text-blue-600 dark:hover:text-blue-400"
+                  }`
+                }
+              >
+                {link.label}
+              </NavLink>
+            </li>
+          ))}
+          {user && (
+            <li>
+              <NavLink
+                to="/my-bookings"
+                onClick={() => setIsOpen(false)}
+                className={({ isActive }) =>
+                  `transition duration-200 ${isActive
+                    ? "font-semibold text-blue-400"
+                    : "hover:text-blue-600 dark:hover:text-blue-400"
+                  }`
+                }
+              >
+                My Bookings
+              </NavLink>
+            </li>
+          )}
           {!user ? (
-            <li><NavItem to="/login" label="Login" onClick={() => setIsOpen(false)} /></li>
+            <Link
+              to="/login"
+              className="btn  btn-primary flex justify-center items-center"
+              onClick={() => setIsOpen(false)}
+            >
+              Login
+            </Link>
           ) : (
             <>
-              <li><NavItem to="/add-package" label="Add Package" onClick={() => setIsOpen(false)} /></li>
-              <li><NavItem to="/manage-packages" label="Manage My Packages" onClick={() => setIsOpen(false)} /></li>
-              <li><button onClick={handleLogout} className="w-full text-left px-4 py-2">Logout</button></li>
+              <li>
+                <NavLink to="/add-package" onClick={() => setIsOpen(false)}>
+                  Add Package
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/manage-packages" onClick={() => setIsOpen(false)}>
+                  Manage My Packages
+                </NavLink>
+              </li>
+              <li>
+                <button
+                  onClick={handleLogout}
+                  className="w-full text-left px-4 py-2"
+                >
+                  Logout
+                </button>
+              </li>
             </>
           )}
         </ul>
+
       )}
     </nav>
   );
